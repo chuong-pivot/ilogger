@@ -19,11 +19,13 @@ dependencies:
    freezed: ^2.3.2
    freezed_annotation: ^2.2.0
    path_provider: ^2.0.14
-   native_screenshot:
-      git:
-         url: https://github.com/chuong-pivot/native_screenshot_forked.git
+   iscreenshot:
+      path: ../iscreenshot/
    device_info_plus: ^8.2.1
    path: ^1.8.3
+   connectivity_plus: ^3.0.5
+   shared_preferences: ^2.1.0
+   internet_connection_checker: ^1.0.0+1
 
 dev_dependencies:
    flutter_test:

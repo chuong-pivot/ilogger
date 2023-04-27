@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_painter/image_painter.dart';
 
+import '../i_logger/i_logger.dart';
 import 'draggable_atom.dart';
-import 'i_logger/i_logger.dart';
 
 /// A wrapper widget that create an overlay over your app
 /// to display utilities buttons.
