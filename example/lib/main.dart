@@ -10,13 +10,7 @@ import 'package:path_provider/path_provider.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  iLoggerHandlingData = (result, isOffline) async {
-    print(isOffline);
-    for (var log in result) {
-      print(log.debugLogFilePath);
-      print(log.imageFilePath);
-    }
-  };
+  iLoggerHandlingData = (result, isOffline) async {};
 
   /// Please note that since [ILoggerWrapper] using riverpod to manage
   /// state, so if your app using riverpod too then you should use
@@ -46,18 +40,6 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Plugin example app'),
-          actions: [
-            IconButton(
-              onPressed: () async {
-                final directory = await getApplicationDocumentsDirectory();
-
-                print(Directory(join(directory.path, 'images'))
-                    .listSync()
-                    .map((e) => e.path));
-              },
-              icon: const Icon(Icons.abc),
-            )
-          ],
         ),
         backgroundColor: Colors.white,
         body: const Center(

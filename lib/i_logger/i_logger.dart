@@ -35,8 +35,7 @@ class ILogger extends _$ILogger {
 
   final prefs = Completer<SharedPreferences>();
   final keyPrefix = 'ilogger_debug_';
-  String current_debug_suffix =
-      DateTime.now().millisecondsSinceEpoch.toString();
+  String debugSuffix = DateTime.now().millisecondsSinceEpoch.toString();
 
   Future<void> takeScreenshot() async {
     setIsTakingScrenshot(true);
@@ -47,7 +46,7 @@ class ILogger extends _$ILogger {
 
     try {
       final dir = await getApplicationDocumentsDirectory();
-      final fileName = 'debug_image_$current_debug_suffix.png';
+      final fileName = 'debug_image_$debugSuffix.png';
 
       final savedDirPath = join(dir.path, FolderPaths.images);
       await Directory(savedDirPath).create(recursive: true);
@@ -89,7 +88,7 @@ class ILogger extends _$ILogger {
     }
 
     if (state.imagePath == null) {
-      current_debug_suffix = DateTime.now().millisecondsSinceEpoch.toString();
+      debugSuffix = DateTime.now().millisecondsSinceEpoch.toString();
     }
 
     if (state.imagePath == null) {
@@ -105,16 +104,16 @@ class ILogger extends _$ILogger {
 
       iLog.i('Write log to file...');
       final dir = await getApplicationDocumentsDirectory();
-      final logFileName = 'debug_log_$current_debug_suffix.log';
+      final logFileName = 'debug_log_$debugSuffix.log';
 
       final savedDirPath = join(dir.path, FolderPaths.debugLog);
       await Directory(savedDirPath).create(recursive: true);
 
       final filePath = join(dir.path, FolderPaths.debugLog, logFileName);
-
       await File(filePath).create(recursive: true);
       final logFile = File(filePath);
       await logFile.writeAsString(logData, flush: true);
+      iLog.i('Log file path: ${logFile.path}');
 
       iLog.i('Check network connection...');
       bool isOnline = false;
@@ -148,7 +147,7 @@ class ILogger extends _$ILogger {
       } else {
         iLog.i('Saving log...');
         saveLog(
-          '$keyPrefix$current_debug_suffix',
+          '$keyPrefix$debugSuffix',
           logResult,
         );
         iLog.i('Done saving log!');
@@ -270,3 +269,80 @@ class CustomLogOutput extends LogOutput {
     event.lines.forEach(ILogger.appendDebugLogs);
   }
 }
+
+/// For upload file to firestore
+// Future<Reference?> uploadFileToServer({
+//   required File file,
+//   required String path,
+// }) async {
+//   try {
+//     debugLogger.d('Uploading $path');
+// 
+//     final strgRef = storageRef.child(path);
+// 
+//     await strgRef.putFile(file);
+// 
+//     return strgRef;
+//   } catch (err) {
+//     debugLogger.e(err);
+//   }
+// 
+//   return null;
+// }
+
+// String? logFileDownloadURL;
+// try {
+//   final debugLogsRef = await uploadFileToServer(
+//     file: logFile,
+//     path: 'debug_logs/$logFileName',
+//   );
+
+//   if (debugLogsRef == null) {
+//     debugLogger.d("Can't upload file to server.");
+//   }
+
+//   await debugLogsRef?.putFile(logFile);
+
+//   logFileDownloadURL = await debugLogsRef?.getDownloadURL();
+// } catch (err) {
+//   debugLogger.e(err);
+// }
+
+// debugLogger.d('Log file download URL: $logFileDownloadURL');
+
+// String? screenshotDownloadUrl;
+
+// if (state.imagePath.isNotEmpty) {
+//   final fileName =
+//       'travelo_debug_screenshot_${DateTime.now().toIso8601String()}.png';
+
+//   final screenshotFile = File(state.imagePath);
+
+//   debugLogger.d('Upload image file name: $fileName');
+
+//   final debugScreenshotRef = await uploadFileToServer(
+//     file: screenshotFile,
+//     path: 'debug_screenshots/$fileName',
+//   );
+
+//   try {
+//     await debugScreenshotRef?.putFile(screenshotFile);
+//   } catch (err) {
+//     debugLogger.d(err);
+//   }
+
+//   screenshotDownloadUrl = await debugScreenshotRef?.getDownloadURL();
+
+//   debugLogger.d('Screenshot download URL:  $screenshotDownloadUrl');
+// }
+
+/// For upload to slack channel
+// await SlackNotifier('T4P5H32FR/B04AX1VU8Q3/1X9rKYxilhahfEIP4F4H08Ua')
+//     .send(
+//   '''New debug log received: ${DateTime.now().toString()} 
+// \nDevice: ${androidInfo.brand} ${androidInfo.model} 
+// \nDownload URL: $logFileDownloadURL
+// \nScreenshot URL: $screenshotDownloadUrl''',
+//   channel: 'aspr_travelo_stg_debug_log',
+//   iconEmoji: ':smirk_cat:',
+// );
