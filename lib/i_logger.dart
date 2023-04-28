@@ -1,4 +1,4 @@
 library debug_logger;
 
-export 'i_logger/i_logger.dart' show iLog, iLoggerHandlingData;
+export 'i_logger/i_logger.dart' show iLog, iLoggerHandlingData, logPrint;
 export 'widgets/wrapper.dart' show ILoggerWrapper;

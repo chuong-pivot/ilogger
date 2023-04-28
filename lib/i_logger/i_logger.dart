@@ -23,6 +23,15 @@ final iLog = ILogger.log;
 Future<void> Function(List<ILoggerResult> result, bool isOffline)?
     iLoggerHandlingData;
 
+void logPrint(Object? obj) {
+  // for PrettyDiaLogger
+  if (kDebugMode) {
+    print(obj);
+  }
+
+  ILogger.appendDebugLogs(obj.toString());
+}
+
 @Riverpod(keepAlive: true)
 class ILogger extends _$ILogger {
   @override
@@ -224,15 +233,6 @@ class ILogger extends _$ILogger {
     state = state.copyWith(
       imagePath: path,
     );
-  }
-
-  static void logPrint(Object? obj) {
-    // for PrettyDiaLogger
-    if (kDebugMode) {
-      print(obj);
-    }
-
-    ILogger.appendDebugLogs(obj.toString());
   }
 
   static void appendDebugLogs(String logs) {
