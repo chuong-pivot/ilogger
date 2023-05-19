@@ -20,7 +20,9 @@ dependencies:
    freezed_annotation: ^2.2.0
    path_provider: ^2.0.15
    iscreenshot:
-      path: ../iscreenshot/
+      git:
+        url: https://github.com/chuong-pivot/iscreenshot.git
+        ref: main # branch name
    device_info_plus: ^9.0.0
    path: ^1.8.3
    connectivity_plus: ^4.0.0
