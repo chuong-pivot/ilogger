@@ -22,7 +22,7 @@ dependencies:
     git:
       url: https://github.com/chuong-pivot/iscreenshot.git
       ref: main # branch name
-  device_info_plus: ^9.1.2
+  device_info_plus: ^10.0.1
   path: ^1.9.0
   connectivity_plus: ^6.0.1
   shared_preferences: ^2.2.2
