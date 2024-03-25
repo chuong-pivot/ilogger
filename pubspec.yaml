@@ -11,30 +11,30 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  logger: ^2.0.2+1
-  plugin_platform_interface: ^2.1.6
-  flutter_riverpod: ^2.4.1
-  riverpod_annotation: ^2.1.6
-  image_painter: ^0.6.1
+  logger: ^2.2.0
+  plugin_platform_interface: ^2.1.8
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.5
+  image_painter: ^0.7.0
   freezed_annotation: ^2.4.1
-  path_provider: ^2.1.1
+  path_provider: ^2.1.2
   iscreenshot:
     git:
       url: https://github.com/chuong-pivot/iscreenshot.git
       ref: main # branch name
-  device_info_plus: ^9.0.3
-  path: ^1.8.3
-  connectivity_plus: ^4.0.2
-  shared_preferences: ^2.2.1
+  device_info_plus: ^9.1.2
+  path: ^1.9.0
+  connectivity_plus: ^6.0.1
+  shared_preferences: ^2.2.2
   internet_connection_checker: ^1.0.0+1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.3
-  build_runner: ^2.4.6
-  riverpod_generator: ^2.3.3
-  freezed: ^2.4.1
+  flutter_lints: ^3.0.1
+  build_runner: ^2.4.8
+  riverpod_generator: ^2.4.0
+  freezed: ^2.4.7
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

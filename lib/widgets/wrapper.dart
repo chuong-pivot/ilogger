@@ -231,8 +231,9 @@ class EditDebugScreenshot extends StatefulWidget {
 }
 
 class _EditDebugScreenshotState extends State<EditDebugScreenshot> {
-  final _imageKey = GlobalKey<ImagePainterState>();
   bool isSaving = false;
+
+  final imagePainterController = ImagePainterController();
 
   Future<void> saveImage(WidgetRef ref) async {
     final debugLoggerState = ref.read(iLoggerProvider);
@@ -246,7 +247,7 @@ class _EditDebugScreenshotState extends State<EditDebugScreenshot> {
     setState(() => isSaving = true);
 
     try {
-      final newImageBytes = await _imageKey.currentState?.exportImage();
+      final newImageBytes = await imagePainterController.exportImage();
 
       if (newImageBytes != null) {
         final file = File(debugLoggerState.imagePath!);
@@ -305,7 +306,7 @@ class _EditDebugScreenshotState extends State<EditDebugScreenshot> {
                       ? Positioned.fill(
                           child: ImagePainter.memory(
                             File(debugLogger.imagePath!).readAsBytesSync(),
-                            key: _imageKey,
+                            controller: imagePainterController,
                           ),
                         )
                       : const SizedBox();
